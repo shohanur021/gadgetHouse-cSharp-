@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/fontawesome-all.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="p-0">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>*@
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-brand d-flex">
+                <img src="~/source/images/logo.png" alt="logo" width="58" height="45" class="d-inline-block align-text-top ms-2">
+                <h2 class="my-auto logo-design" style="color: #F35634; ">GadgetHouse</h2>
+            </div>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item me-4">
+                        <a class="nav-link text-light " href="@Url.Action("Index", "Home")">home</a>
+                    </li>
+                    <li class="nav-item me-4">
+                        <a class="nav-link text-light " href="@Url.Action("Contact", "Home")">contant</a>
+                    </li>
+
+                    @if (Session["userEmail"] == null)
+                    {
+                        <li class="nav-item dropdown me-4">
+                            <a class=" btn btn-success btn-sm mt-1 dropdown-toggle text-white " data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">log in</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item fw-bold text-primary" href="@Url.Action("userLogin", "LoginRegister")">as User</a></li>
+                                <li><a class="dropdown-item fw-bold text-primary" href="/">as Admin</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item me-4">
+                            <a class=" btn btn-danger btn-sm mt-1" href="@Url.Action("userLogout", "LoginRegister")">Log out</a>
+                        </li>
+                    }
+                    @if (Session["userEmail"] == null)
+                    {
+                        <li class="nav-item me-4">
+                            <a class=" btn btn-warning btn-sm mt-1 text-dark" href="@Url.Action("userRegistration", "LoginRegister")">sign up</a>
+                        </li>
+                    }
+                    <li class="nav-item me-4">
+                        <a class="nav-link nav-decoration" href="/"> <i class="fas fa-shopping-cart" style="font-size: 25px; color: rgb(191, 128, 255) "></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Happy Shooping</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
